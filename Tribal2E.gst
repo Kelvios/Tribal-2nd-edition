@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<gameSystem xmlns="http://www.battlescribe.net/schema/gameSystemSchema" id="sys-e140-121e-9b34-0be3" name="TRIBAL 2nd Edition" revision="4" battleScribeVersion="2.03" authorUrl="https://github.com/Kelvios/Tribal-2nd-edition" type="gameSystem" authorName="Kelvios. Unofficial fan-made data for TRIBAL 2nd Edition (rules by Mana Press).">
+<gameSystem xmlns="http://www.battlescribe.net/schema/gameSystemSchema" id="sys-e140-121e-9b34-0be3" name="TRIBAL 2nd Edition" revision="5" battleScribeVersion="2.03" authorUrl="https://github.com/Kelvios/Tribal-2nd-edition" type="gameSystem" authorName="Kelvios. Unofficial fan-made data for TRIBAL 2nd Edition (rules by Mana Press).">
   <costTypes>
     <costType id="2583-462d-9a3d-8b99" name="Honour" defaultValue="0" />
   </costTypes>
@@ -19,6 +19,7 @@
     <categoryEntry id="ef8f-b97c-ea97-503e" name="Marksmen" hidden="false" />
     <categoryEntry id="cd73-16c4-bac1-dd3f" name="Shaman (optional rule)" hidden="false" />
     <categoryEntry id="98ce-fd5f-59ba-0e1a" name="Historical Rules" hidden="false" />
+    <categoryEntry id="793a-5eac-3a7c-d967" name="Free Skills" hidden="false" />
   </categoryEntries>
   <forceEntries>
     <forceEntry id="1128-7928-73f4-74fc" name="Warband" hidden="false">
@@ -67,6 +68,11 @@
         <categoryLink id="7949-5fa3-abf7-d41a" name="Historical Rules" hidden="false" targetId="98ce-fd5f-59ba-0e1a" type="category">
           <constraints>
             <constraint type="min" value="0" field="selections" scope="parent" shared="true" id="125e-4b20-9787-4c94" />
+          </constraints>
+        </categoryLink>
+        <categoryLink id="899b-590d-8b41-701a" name="Free Skills" hidden="false" targetId="793a-5eac-3a7c-d967" type="category">
+          <constraints>
+            <constraint type="min" value="0" field="selections" scope="parent" shared="true" id="d83a-2663-825b-7b5d" />
           </constraints>
         </categoryLink>
       </categoryLinks>

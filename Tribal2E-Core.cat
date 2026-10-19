@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<catalogue xmlns="http://www.battlescribe.net/schema/catalogueSchema" library="false" id="f5eb-99bf-6530-ebf1" name="TRIBAL 2nd Edition - Core Warband" gameSystemId="sys-e140-121e-9b34-0be3" gameSystemRevision="4" revision="4" battleScribeVersion="2.03" authorUrl="https://github.com/Kelvios/Tribal-2nd-edition" type="catalogue" authorName="Kelvios. Unofficial fan-made data for TRIBAL 2nd Edition (rules by Mana Press).">
+<catalogue xmlns="http://www.battlescribe.net/schema/catalogueSchema" library="false" id="f5eb-99bf-6530-ebf1" name="TRIBAL 2nd Edition - Core Warband" gameSystemId="sys-e140-121e-9b34-0be3" gameSystemRevision="5" revision="5" battleScribeVersion="2.03" authorUrl="https://github.com/Kelvios/Tribal-2nd-edition" type="catalogue" authorName="Kelvios. Unofficial fan-made data for TRIBAL 2nd Edition (rules by Mana Press).">
   <sharedSelectionEntries>
     <selectionEntry type="upgrade" name="Short Weapon" hidden="false" id="5e2b-fe00-9542-4e05" import="true">
       <rules>
@@ -553,7 +553,7 @@
           <characteristics>
             <characteristic name="Wounds" typeId="aea1-39b1-ec9b-475a">6</characteristic>
             <characteristic name="Skills" typeId="1200-2470-7a16-e426">0-3</characteristic>
-            <characteristic name="Notes" typeId="fb14-0b46-30b6-76a9">Always fights and moves alone; never joins Heroes or Formations. Combat hand = 1 card per remaining Wound. Free bonus: 1 free Elite Skill for any 1 Unit in the warband (including itself), OR 1 free Veteran Skill for each of 2 Units -- apply this as a discount when you spend Honour on Skills.</characteristic>
+            <characteristic name="Notes" typeId="fb14-0b46-30b6-76a9">Always fights and moves alone; never joins Heroes or Formations. Combat hand = 1 card per remaining Wound. Free bonus: 1 free Elite Skill for any 1 Unit in the warband (including itself), OR 1 free Veteran Skill for each of 2 Units -- when you buy the Skill, take the matching credit under Free Skills.</characteristic>
           </characteristics>
         </profile>
       </profiles>
@@ -644,7 +644,7 @@
           <characteristics>
             <characteristic name="Wounds" typeId="aea1-39b1-ec9b-475a">5</characteristic>
             <characteristic name="Skills" typeId="1200-2470-7a16-e426">0-2</characteristic>
-            <characteristic name="Notes" typeId="fb14-0b46-30b6-76a9">Max 1 Hero may be included per Formation of 5 Warriors or Marksmen in the warband (enforced: the Heroes limit grows by 1 for each Warriors or Marksmen Formation in the warband). Always fights and moves alone. Combat hand = 1 card per remaining Wound. Free bonus per Hero: 1 free Veteran Skill for any 1 Unit (or spend 1 more Honour to upgrade that free Skill to Elite) -- apply as a discount.</characteristic>
+            <characteristic name="Notes" typeId="fb14-0b46-30b6-76a9">Max 1 Hero may be included per Formation of 5 Warriors or Marksmen in the warband (enforced: the Heroes limit grows by 1 for each Warriors or Marksmen Formation in the warband). Always fights and moves alone. Combat hand = 1 card per remaining Wound. Free bonus per Hero: 1 free Veteran Skill for any 1 Unit (or spend 1 more Honour to upgrade that free Skill to Elite) -- when you buy the Skill, take a Hero credit under Free Skills.</characteristic>
           </characteristics>
         </profile>
       </profiles>
@@ -825,7 +825,7 @@
           <characteristics>
             <characteristic name="Wounds" typeId="aea1-39b1-ec9b-475a">4</characteristic>
             <characteristic name="Skills" typeId="1200-2470-7a16-e426">0-3</characteristic>
-            <characteristic name="Notes" typeId="fb14-0b46-30b6-76a9">Optional rule; only 1 Shaman per warband. Armed with neither short nor long weapons. Always fights and moves alone. Combat hand = 1 card per remaining Wound. Free bonus: 1 free Veteran Skill for any 1 Unit, the same as a Hero's free Veteran Skill -- apply as a discount when you spend Honour on Skills.</characteristic>
+            <characteristic name="Notes" typeId="fb14-0b46-30b6-76a9">Optional rule; only 1 Shaman per warband. Armed with neither short nor long weapons. Always fights and moves alone. Combat hand = 1 card per remaining Wound. Free bonus: 1 free Veteran Skill for any 1 Unit, the same as a Hero's free Veteran Skill -- when you buy the Skill, take the Shaman credit under Free Skills.</characteristic>
           </characteristics>
         </profile>
       </profiles>
@@ -864,6 +864,98 @@
         <cost name="Honour" typeId="2583-462d-9a3d-8b99" value="1" />
       </costs>
     </selectionEntry>
+    <selectionEntry type="upgrade" name="Free Skill credit: Warlord, one Elite Skill (-2 Honour)" hidden="false" id="00cf-7c68-ea0b-9d9f" import="true">
+      <categoryLinks>
+        <categoryLink id="d237-cc05-dc2b-789b" name="Free Skills" hidden="false" targetId="793a-5eac-3a7c-d967" primary="true" />
+      </categoryLinks>
+      <rules>
+        <rule id="92ea-9d49-f3ad-03d8" name="Free Skill credit: Warlord, one Elite Skill" hidden="false">
+          <description>The Warlord's fame lets any 1 Unit (including the Warlord) take 1 Elite Skill free. Take this credit when you buy that Elite Skill: it cancels the Skill's 2 Honour. Alternative to the two Veteran credits, not both. New Recruit does not check which Skill you applied it to: take it only when you have bought the Skill, and the Unit may not go over its normal number of Skills.</description>
+        </rule>
+      </rules>
+      <constraints>
+        <constraint type="max" value="1" field="selections" scope="roster" shared="true" id="4989-0ddf-77de-f6c7" />
+      </constraints>
+      <modifiers>
+        <modifier type="set" field="4989-0ddf-77de-f6c7" value="0">
+          <conditions>
+            <condition type="atLeast" field="selections" scope="roster" value="1" shared="true" includeChildSelections="false" includeChildForces="false" childId="e8f1-7f63-db7f-714f" />
+          </conditions>
+        </modifier>
+      </modifiers>
+      <costs>
+        <cost name="Honour" typeId="2583-462d-9a3d-8b99" value="-2" />
+      </costs>
+    </selectionEntry>
+    <selectionEntry type="upgrade" name="Free Skill credit: Warlord, Veteran Skill for a Unit (-1 Honour, up to 2)" hidden="false" id="e8f1-7f63-db7f-714f" import="true">
+      <categoryLinks>
+        <categoryLink id="e324-d9c0-a7c7-ed39" name="Free Skills" hidden="false" targetId="793a-5eac-3a7c-d967" primary="true" />
+      </categoryLinks>
+      <rules>
+        <rule id="5aee-262d-aea6-d3f0" name="Free Skill credit: Warlord, Veteran Skill for a Unit" hidden="false">
+          <description>Alternatively the Warlord lets 2 different Units each take 1 Veteran Skill free. Take this credit once for each of the two Veteran Skills you buy (up to 2). Alternative to the Elite credit, not both. New Recruit does not check which Skill you applied it to: take it only when you have bought the Skill, and the Unit may not go over its normal number of Skills.</description>
+        </rule>
+      </rules>
+      <constraints>
+        <constraint type="max" value="2" field="selections" scope="roster" shared="true" id="47c9-c598-77de-0fa1" />
+      </constraints>
+      <modifiers>
+        <modifier type="set" field="47c9-c598-77de-0fa1" value="0">
+          <conditions>
+            <condition type="atLeast" field="selections" scope="roster" value="1" shared="true" includeChildSelections="false" includeChildForces="false" childId="00cf-7c68-ea0b-9d9f" />
+          </conditions>
+        </modifier>
+      </modifiers>
+      <costs>
+        <cost name="Honour" typeId="2583-462d-9a3d-8b99" value="-1" />
+      </costs>
+    </selectionEntry>
+    <selectionEntry type="upgrade" name="Free Skill credit: each Hero, one Veteran Skill (-1 Honour)" hidden="false" id="01c1-c780-2df2-6099" import="true">
+      <categoryLinks>
+        <categoryLink id="5eb9-f44f-4156-7f7e" name="Free Skills" hidden="false" targetId="793a-5eac-3a7c-d967" primary="true" />
+      </categoryLinks>
+      <rules>
+        <rule id="0613-55fe-0cf4-2bf4" name="Free Skill credit: each Hero, one Veteran Skill" hidden="false">
+          <description>Each Hero lets any 1 Unit take 1 Veteran Skill free. Take one credit per Hero when you buy that Skill. Applied to an Elite Skill instead, you pay 1 more Honour (this credit is only 1). New Recruit does not check which Skill you applied it to: take it only when you have bought the Skill, and the Unit may not go over its normal number of Skills.</description>
+        </rule>
+      </rules>
+      <constraints>
+        <constraint type="max" value="0" field="selections" scope="roster" shared="true" id="0261-1ce5-5bab-cc12" />
+      </constraints>
+      <modifiers>
+        <modifier type="increment" field="0261-1ce5-5bab-cc12" value="1">
+          <repeats>
+            <repeat field="selections" scope="roster" value="1" shared="true" includeChildSelections="false" includeChildForces="false" childId="cdf2-4f60-5c31-a783" repeats="1" roundUp="false" />
+          </repeats>
+        </modifier>
+      </modifiers>
+      <costs>
+        <cost name="Honour" typeId="2583-462d-9a3d-8b99" value="-1" />
+      </costs>
+    </selectionEntry>
+    <selectionEntry type="upgrade" name="Free Skill credit: Shaman, one Veteran Skill (-1 Honour)" hidden="false" id="b276-9a39-a286-a510" import="true">
+      <categoryLinks>
+        <categoryLink id="cafe-c2e8-b776-4496" name="Free Skills" hidden="false" targetId="793a-5eac-3a7c-d967" primary="true" />
+      </categoryLinks>
+      <rules>
+        <rule id="9f05-21ec-df7d-af4d" name="Free Skill credit: Shaman, one Veteran Skill" hidden="false">
+          <description>The Shaman (optional rule) lets any 1 Unit take 1 Veteran Skill free, the same as a Hero. Take it when you buy that Skill. Only available with a Shaman in the warband. New Recruit does not check which Skill you applied it to: take it only when you have bought the Skill, and the Unit may not go over its normal number of Skills.</description>
+        </rule>
+      </rules>
+      <constraints>
+        <constraint type="max" value="0" field="selections" scope="roster" shared="true" id="8d04-18aa-6b30-34d6" />
+      </constraints>
+      <modifiers>
+        <modifier type="increment" field="8d04-18aa-6b30-34d6" value="1">
+          <repeats>
+            <repeat field="selections" scope="roster" value="1" shared="true" includeChildSelections="false" includeChildForces="false" childId="cd73-16c4-bac1-dd3f" repeats="1" roundUp="false" />
+          </repeats>
+        </modifier>
+      </modifiers>
+      <costs>
+        <cost name="Honour" typeId="2583-462d-9a3d-8b99" value="-1" />
+      </costs>
+    </selectionEntry>
   </sharedSelectionEntries>
   <entryLinks>
     <entryLink name="Warlord" hidden="false" id="25d4-cfa3-4228-662d" type="selectionEntry" targetId="7881-bd2f-a577-ca1c" import="true" />
@@ -876,5 +968,9 @@
     <entryLink name="Stalking the Prey (Historical Rule, once per warband)" hidden="false" id="2af7-66f4-b482-bf3f" type="selectionEntry" targetId="007e-bd85-9776-54c2" import="true" />
     <entryLink name="Trophy Hunters (Historical Rule, once per warband)" hidden="false" id="4ec7-0e1b-af00-ee8f" type="selectionEntry" targetId="6781-2a63-9a28-b77d" import="true" />
     <entryLink name="War Dance (Historical Rule, once per warband)" hidden="false" id="030d-4025-c1f7-8589" type="selectionEntry" targetId="7cfb-c955-e515-d741" import="true" />
+    <entryLink name="Free Skill credit: Warlord, one Elite Skill (-2 Honour)" hidden="false" id="b878-0e75-4010-255e" type="selectionEntry" targetId="00cf-7c68-ea0b-9d9f" import="true" />
+    <entryLink name="Free Skill credit: Warlord, Veteran Skill for a Unit (-1 Honour, up to 2)" hidden="false" id="9dd4-2647-5a16-a5cf" type="selectionEntry" targetId="e8f1-7f63-db7f-714f" import="true" />
+    <entryLink name="Free Skill credit: each Hero, one Veteran Skill (-1 Honour)" hidden="false" id="2c16-2d50-5f5d-c8cf" type="selectionEntry" targetId="01c1-c780-2df2-6099" import="true" />
+    <entryLink name="Free Skill credit: Shaman, one Veteran Skill (-1 Honour)" hidden="false" id="2adc-1f5e-11a4-51ab" type="selectionEntry" targetId="b276-9a39-a286-a510" import="true" />
   </entryLinks>
 </catalogue>

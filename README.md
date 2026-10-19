@@ -17,9 +17,20 @@ If you don't own the game, please buy it. These files won't teach you how to pla
 
 The core rules only. The Primeval and Brutal supplements are not included.
 
+## Free Skills
+
+The Warlord, each Hero and the Shaman give free Skills in the book. In these files they are credits, listed under a **Free Skills** heading, each with a negative Honour cost. Take a credit when you buy the Skill it pays for:
+
+- **Warlord, one Elite Skill:** -2 Honour. Or instead:
+- **Warlord, Veteran Skill for a Unit:** -1 Honour, up to two (for two different Units). You cannot hold both Warlord options.
+- **Each Hero, one Veteran Skill:** -1 Honour per Hero. Used on an Elite Skill, you pay 1 more Honour, as the book says.
+- **Shaman, one Veteran Skill:** -1 Honour, only with a Shaman in the warband.
+
+New Recruit limits how many credits you can take but cannot check which Skill you used one on, so please apply them as the book says (and keep each Unit within its normal number of Skills).
+
 ## Version
 
-Revision 4. Revision 3 was tested in the New Recruit app, and revision 4 changes only the text of the Shaman's note (it now says the Shaman gets 1 free Veteran Skill, like a Hero), so it has not been tested again. The tests covered: the warband limits (including the Heroes limit that grows with each Formation), the roster caps on Counting Coup and Rally Around the Flag, weapon defaults, and Skill and Historical Rule choices all behaved as expected. Where a rule can't be expressed exactly in New Recruit, check it yourself against your rulebook.
+Revision 5. Revision 5 adds the Free Skills credits above and was tested in the New Recruit app. Revision 3 was tested more fully: the warband limits (including the Heroes limit that grows with each Formation), the roster caps on Counting Coup and Rally Around the Flag, weapon defaults, and Skill and Historical Rule choices all behaved as expected. Revision 4 changed only the text of the Shaman's note. Where a rule can't be expressed exactly in New Recruit, check it yourself against your rulebook.
 
 ## Using them
 
