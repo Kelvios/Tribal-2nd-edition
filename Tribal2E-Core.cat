@@ -781,7 +781,7 @@
           <characteristics>
             <characteristic name="Wounds" typeId="aea1-39b1-ec9b-475a">1</characteristic>
             <characteristic name="Skills" typeId="1200-2470-7a16-e426">0-2</characteristic>
-            <characteristic name="Notes" typeId="fb14-0b46-30b6-76a9">Formation of 5 models, 1 Wound each, Skills apply to the whole Formation. Combat hand = 1 card per surviving model (1-5). Armed with neither short nor long weapons (bows, javelins, slings etc.). Max 2 Units of Marksmen per warband unless a faction supplement says otherwise.</characteristic>
+            <characteristic name="Notes" typeId="fb14-0b46-30b6-76a9">Formation of 5 models, 1 Wound each, Skills apply to the whole Formation. Combat hand = 1 card per surviving model (1-5). Carry no short or long weapon (bows, javelins, slings etc.) unless they take Elite Marksmen, in which case they choose one. Max 2 Units of Marksmen per warband unless a faction supplement says otherwise.</characteristic>
           </characteristics>
         </profile>
       </profiles>
