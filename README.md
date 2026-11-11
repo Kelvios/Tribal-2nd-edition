@@ -36,6 +36,17 @@ Revision 5. Revision 5 adds the Free Skills credits above and was tested in the 
 
 New Recruit reads a game system from the top of a repository, so you can add this one with **Add or remove games, Add from GitHub** and entering `Kelvios/Tribal-2nd-edition` as the repository (without `https://github.com/`). Or download `Tribal2E.gst` and `Tribal2E-Core.cat`, and open the `.gst` first and the `.cat` after it, in the New Recruit Editor or Builder.
 
+## Printable warband sheet
+
+`templates/tribal-warband-sheet.html` is a New Recruit print template that turns a warband into an A4 sheet for the table. It has a card for the Warlord, each Hero and the Shaman with numbered wound boxes, and a card for each Formation with figure circles to tick off. Each card also shows Blood Payment, the weapon's suit and bonus, armour, and a one-line reminder of each skill.
+
+To use it:
+
+1. Open `templates/tribal-warband-sheet.html`, choose **Raw**, then select all and copy.
+2. In New Recruit, open your Tribal 2nd Edition list, go to **Export**, and choose the custom template option.
+3. Paste the template into the template box and save it with a name so it's there next time.
+4. Print. In your browser's print window, set paper to A4, turn **background graphics on** (or you lose the colours), and turn **headers and footers off**.
+
 ## Updating
 
 When these files change, the `revision` number inside them goes up, so New Recruit offers the update from the same Add from GitHub entry. You don't need to remove and re-add the game system.

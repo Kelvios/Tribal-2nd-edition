@@ -1,0 +1,305 @@
+<template>
+  <!--
+    Tribal warband sheet, v2: New Recruit print template (A4).
+    It works things out from names and categories and adds no rule of its own:
+      weapon suit and bonus: Short Weapon = clubs, Long Weapon = spades; Adept +2; Champion +2 own suit, +1 the other;
+        Duellist +1 on both suits (T2E.MELEE.STRIKES-BLACK, T2E.SKILL.ADEPT, T2E.SKILL.CHAMPION, T2E.SKILL.DUELLIST)
+      Blood Payment: Warlord 2, every other card 1 (T2E.MELEE.BLOOD-PAYMENT; Shaman 1)
+      Tough: one extra dashed box marked "not in hand" (T2E.SKILL.TOUGH)
+      once per warband: every unit in the Historical Rules category goes into the Warband abilities strip
+    A skill or ability not in the one-liner table prints the catalogue's own description.
+  -->
+  <div class="tsheet">
+
+    <header class="top">
+      <h1>
+        <if field="name">{{name}}</if>
+        <else><span class="nmw dark"></span></else>
+      </h1>
+      <span class="sub">Tribal 2nd Edition · Core Warband</span>
+      <forces max="1">
+        <costs>
+          <if field="name" type="equals" value="Honour"><span class="tot">{{value}} Honour</span></if>
+        </costs>
+      </forces>
+    </header>
+
+    <div class="grid">
+      <div class="tier t-heroes">Heroes and Shaman</div>
+      <div class="tier t-forms">Formations · combat hand = figures left</div>
+
+      <!-- ===== one card per unit; the CSS puts them in sheet order by category ===== -->
+      <units exclude-primary-categories="Free Skills">
+        <if field="primary" type="not-match" value="^Historical" flags="i">
+
+          <!-- No <set> anywhere: in testing, a <set> inside a loop did not reach code after it.
+               Category: tested on the unit's primary at each use; the card's classes are set with set-attribute.
+               Weapon, mastery, armour and Tough: matched on the unit's options text. -->
+          <div class="cardwrap" type="card">
+            <section class="card">
+              <if field="primary" type="match" value="^Warlord" flags="i"><set-attribute name="class" value="cardwrap w-warlord" in=".cardwrap"/><set-attribute name="class" value="card warlord" in=".card"/></if>
+              <if field="primary" type="match" value="^Heroes" flags="i"><set-attribute name="class" value="cardwrap w-hero" in=".cardwrap"/><set-attribute name="class" value="card hero" in=".card"/></if>
+              <if field="primary" type="match" value="^Shaman" flags="i"><set-attribute name="class" value="cardwrap w-shaman" in=".cardwrap"/><set-attribute name="class" value="card shaman" in=".card"/></if>
+              <if field="primary" type="match" value="^Warriors" flags="i"><set-attribute name="class" value="cardwrap w-warrior" in=".cardwrap"/><set-attribute name="class" value="card warrior" in=".card"/></if>
+              <if field="primary" type="match" value="^Marksmen" flags="i"><set-attribute name="class" value="cardwrap w-marks" in=".cardwrap"/><set-attribute name="class" value="card marks" in=".card"/></if>
+
+              <div class="hd">
+                <div class="who">
+                  <span class="nm">
+                    <if field="customName">{{customName}}</if>
+                    <else><span class="nmw"></span></else>
+                  </span>
+                  <if field="primary" type="match" value="^Warlord" flags="i"><span class="ty">Warlord</span></if>
+                  <if field="primary" type="match" value="^Heroes" flags="i"><span class="ty">Hero</span></if>
+                  <if field="primary" type="match" value="^Shaman" flags="i"><span class="ty">Shaman</span></if>
+                </div>
+                <div class="bp">
+                  <if field="primary" type="match" value="^Warlord" flags="i"><b>2</b></if>
+                  <else><b>1</b></else>
+                  <span>Blood</span>
+                </div>
+              </div>
+
+              <div class="bd">
+                <div class="trk">
+                  <if field="primary" type="match" value="^Warlord" flags="i"><div class="tlbl">Wounds <em>· combat hand = boxes left</em></div></if>
+                  <if field="primary" type="match" value="^Warriors" flags="i"><div class="tlbl">Warriors</div></if>
+                  <if field="primary" type="match" value="^Marksmen" flags="i"><div class="tlbl">Marksmen</div></if>
+                  <div class="track">
+                    <if field="primary" type="match" value="^Warlord" flags="i">
+                      <span class="box"><i>6</i></span><span class="box"><i>5</i></span><span class="box"><i>4</i></span><span class="box"><i>3</i></span><span class="box"><i>2</i></span><span class="box"><i>1</i></span>
+                    </if>
+                    <if field="primary" type="match" value="^Heroes" flags="i">
+                      <span class="box"><i>5</i></span><span class="box"><i>4</i></span><span class="box"><i>3</i></span><span class="box"><i>2</i></span><span class="box"><i>1</i></span>
+                    </if>
+                    <if field="primary" type="match" value="^Shaman" flags="i">
+                      <span class="box"><i>4</i></span><span class="box"><i>3</i></span><span class="box"><i>2</i></span><span class="box"><i>1</i></span>
+                    </if>
+                    <if field="primary" type="match" value="^(Warriors|Marksmen)" flags="i">
+                      <span class="box fig"></span><span class="box fig"></span><span class="box fig"></span><span class="box fig"></span><span class="box fig"></span>
+                    </if>
+                    <if field="options" type="match" value="Tough \("><span class="box extra"><i>+1</i></span><span class="xnote">not in hand</span></if>
+                  </div>
+                </div>
+
+                <div class="kit">
+                  <div class="eq">
+                    <!-- weapon chip: only one of these prints -->
+                    <if field="options" type="match" value="Long Weapon">
+                      <span class="chip"><b>Long weapon</b> <span class="suit">♠</span>
+                        <if field="options" type="not-match" value="(Adept|Champion|Duellist) \(">+1</if>
+                        <if field="options" type="match" value="Adept \(">+2</if>
+                        <if field="options" type="match" value="Champion \(">+2 · <span class="suit">♣</span> +1</if>
+                        <if field="options" type="match" value="Duellist \(">+1 · <span class="suit">♣</span> +1</if>
+                      </span>
+                    </if>
+                    <if field="options" type="match" value="Short Weapon">
+                      <span class="chip"><b>Short weapon</b> <span class="suit">♣</span>
+                        <if field="options" type="not-match" value="(Adept|Champion|Duellist) \(">+1</if>
+                        <if field="options" type="match" value="Adept \(">+2</if>
+                        <if field="options" type="match" value="Champion \(">+2 · <span class="suit">♠</span> +1</if>
+                        <if field="options" type="match" value="Duellist \(">+1 · <span class="suit">♠</span> +1</if>
+                      </span>
+                    </if>
+                    <if field="options" type="not-match" value="(Long|Short) Weapon">
+                      <span class="chip"><b>No hand weapon</b></span>
+                    </if>
+                    <!-- armour chip: only one of these prints -->
+                    <if field="options" type="match" value="Light Armour"><span class="chip"><b>Light armour</b> 11+</span></if>
+                    <if field="options" type="match" value="Heavy Armour"><span class="chip"><b>Heavy armour</b> 8+, Slowed</span></if>
+                    <if field="options" type="not-match" value="(Light|Heavy) Armour"><span class="chip none">No armour</span></if>
+                  </div>
+
+                  <!-- skills and unit-level historical rules: one line each; weapon and armour entries are left out -->
+                  <ul class="ab">
+                    <entries>
+                      <if field="name" type="match" value="\((Veteran|Elite) Skill\)|\(Historical Rule" flags="i">
+                        <if field="name" type="not-match" value="^(Light|Heavy) Armour" flags="i">
+                          <li>
+                            <rules recursive="false">
+                              <span class="n">{{name}}</span>
+                            </rules>
+                            <if field="name" type="match" value="\(Veteran Skill\)"><span class="t"><span class="tl">Veteran</span><span class="ts">Vet</span></span></if>
+                            <if field="name" type="match" value="\(Elite Skill\)"><span class="t">Elite</span></if>
+                            <if field="name" type="match" value="\(Historical Rule"><span class="t">Historical</span></if>
+                            <rules recursive="false">
+                              <if field="name" type="equals" value="Adept">Weapon bonus +2.</if>
+                              <if field="name" type="equals" value="Agile">Always starts a round with Advantage (both Agile: the charger).</if>
+                              <if field="name" type="equals" value="Cunning">+1 on red Feints (<span class="red">♥♦</span>).</if>
+                              <if field="name" type="equals" value="Deadly Shot">+2 on ranged attacks.</if>
+                              <if field="name" type="equals" value="Duellist">Weapon bonus on both Spade and Club strikes.</if>
+                              <if field="name" type="equals" value="Elite Marksmen">Counts as armed with a short or long weapon; fights like Warriors.</if>
+                              <if field="name" type="equals" value="Fearsome">+1 hit when it wins an Exchange against a Formation with a black strike.</if>
+                              <if field="name" type="equals" value="Hard Target">Marksmen shooting at it get -2.</if>
+                              <if field="name" type="equals" value="Long Shot">May use its Activation Card to shoot like Marksmen; a kill pays Blood Payment.</if>
+                              <if field="name" type="equals" value="Ranger">Not slowed by Tough Going. Walks over Impassable it clears in one activation.</if>
+                              <if field="name" type="equals" value="Savage">+1 hit when it wins an Exchange against a Character with a black strike.</if>
+                              <if field="name" type="equals" value="Survival Instinct">After winning an Exchange it may break off: both sides discard their hands, the round counts as lost.</if>
+                              <if field="name" type="equals" value="Tactician">After setup, move one enemy Hero or Formation inside their setup zone.</if>
+                              <if field="name" type="equals" value="Throwing Weapons">On a Charge flip a card: black = 1 hit before the Charge resolves.</if>
+                              <if field="name" type="equals" value="Tough">+1 Wound, not counted in the combat hand.</if>
+                              <if field="name" type="equals" value="Curse">After moving, flip for an enemy within a long edge: black removes its Activation Card this turn.</if>
+                              <if field="name" type="equals" value="Divination">Once per game, peek at the top 6 cards of either or both draw decks and put them back in order.</if>
+                              <if field="name" type="equals" value="Healing">After moving, flip for a friend within a short edge: black restores 1 Wound or figure.</if>
+                              <if field="name" type="equals" value="Rat Cunning">Each turn draw 2, keep one hidden, say keep or offer; its holder uses it for initiative and as an Activation Card.</if>
+                              <if field="name" type="equals" value="Respected">Card Pools only: Warlord draws 1 extra Card Pool card (6).</if>
+                              <if field="name" type="equals" value="Berserker">Combat hand always as if unwounded; -2 on its red Feints.</if>
+                              <if field="name" type="equals" value="Champion">+2 on its own Strike suit, +1 on the other.</if>
+                              <if field="name" type="equals" value="Concealment">Units start face down as red cards among black decoys; all revealed before turn 1.</if>
+                              <if field="name" type="equals" value="Seasoned">Discard and redraw 2 cards before the first Exchange.</if>
+                              <if field="name" type="equals" value="Strong">+1 hit when it wins an Exchange with a black strike.</if>
+                              <if field="name" type="equals" value="Evil Eye">Mark an enemy in sight; once a turn force a just-played attack card to be replaced at random.</if>
+                              <if field="name" type="equals" value="Revered">Card Pools only: Warlord draws 2 extra Card Pool cards (7).</if>
+                              <if field="name" type="match" value="^Assegai">Each combat round, after hands are dealt, declare short or long weapons for that round.</if>
+                              <if field="name" type="equals" value="Cavalry">Mounted: Walk 2 short, March 2 long, Sprint 4 long card-edges; one turn per move.</if>
+                              <if field="name" type="equals" value="Chariots">Mounted like Cavalry but turns only at the start; +1 combat card after a March or Sprint charge.</if>
+                              <if field="name" type="equals" value="Counting Coup">Black-Strike wins cause no hits. Win a round: also take 1 Honour from the enemy.</if>
+                              <if field="name" type="equals" value="Rally Around the Flag">Friendly Units within 2 long card-edges never lose a round (the enemy retreats, no reward). Flag in enemy hands at game end: -5 Honour.</if>
+                              <if field="name" type="not-match" value="^(Adept|Agile|Cunning|Deadly Shot|Duellist|Elite Marksmen|Fearsome|Hard Target|Long Shot|Ranger|Savage|Survival Instinct|Tactician|Throwing Weapons|Tough|Curse|Divination|Healing|Rat Cunning|Respected|Berserker|Champion|Concealment|Seasoned|Strong|Evil Eye|Revered|Assegai.*|Cavalry|Chariots|Counting Coup|Rally Around the Flag)$">{{description}}</if>
+                            </rules>
+                          </li>
+                        </if>
+                      </if>
+                    </entries>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        </if>
+      </units>
+
+      <!-- ===== WARBAND ABILITIES: every unit in the Historical Rules category (once-per-warband rules) ===== -->
+      <section class="panel">
+        <div class="ph">Warband abilities</div>
+        <div class="pb">
+          <units exclude-primary-categories="Free Skills">
+            <if field="primary" type="match" value="^Historical" flags="i">
+              <rules recursive="false">
+                <div class="abil">
+                  <span class="box"></span>
+                  <div>
+                    <b>{{name}}</b>
+                    <span>
+                      <if field="name" type="match" value="^(War Dance|Boasts)">Before turn 1, secret Honour bid; both lose it. Win 5 cards, lose 2, tie 3 each. Bid ____</if>
+                      <if field="name" type="equals" value="Stalking the Prey">4 face-down cards: black = Unit in reserve, red = decoy.</if>
+                      <if field="name" type="equals" value="Raid from the Water">After setup, before turn 1, move all your Units up to 2 long card-edges.</if>
+                      <if field="name" type="equals" value="Trophy Hunters">After a melee kill, spend a whole activation on trophies: +1 Honour from the supply.</if>
+                      <if field="name" type="not-match" value="^(War Dance|Boasts.*|Stalking the Prey|Raid from the Water|Trophy Hunters)$">{{description}}</if>
+                    </span>
+                  </div>
+                </div>
+              </rules>
+            </if>
+          </units>
+        </div>
+      </section>
+    </div>
+
+  </div>
+</template>
+<style>
+@page { size: A4 portrait; margin: 10mm; }
+.tsheet {
+  --warlord: #8B2F2F; --hero: #C58B39; --shaman: #674188; --hist: #3D7D4A; --warrior: #5B6C8F; --marks: #4D8C72;
+  --parch: #F5F1E8; --ink: #141210; --muted: #4d4840; --line: #3a352e; --rule: #cfc6b4;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif; font-size: 8.6pt; line-height: 1.2; color: var(--ink);
+  width: 190mm; max-width: 100%; margin: 0 auto; background: #fff;
+}
+.tsheet * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media print { .tsheet { width: auto; margin: 0; } }
+
+/* top bar */
+.tsheet .top { display: flex; align-items: baseline; gap: 4mm; border-bottom: 1mm solid var(--ink); padding-bottom: 1mm; margin-bottom: 2.6mm; }
+.tsheet .top h1 { margin: 0; font-size: 18pt; letter-spacing: .3px; }
+.tsheet .top .sub { font-size: 9.5pt; color: var(--muted); }
+.tsheet .top .tot { margin-left: auto; font-size: 10pt; font-weight: 700; white-space: nowrap; }
+
+/* one grid for the sheet; "order" puts the cards in sheet order:
+   Warlord, Heroes and Shaman (2 across), Formations (3 across: Warriors, then Marksmen), Warband abilities */
+.tsheet .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2.6mm 3.4mm; align-items: stretch; }
+.tsheet .cardwrap { grid-column: span 2; order: 60; break-inside: avoid; page-break-inside: avoid; }
+.tsheet .w-warlord { grid-column: 1 / -1; order: 10; }
+.tsheet .w-hero    { grid-column: span 3; order: 21; }
+.tsheet .w-shaman  { grid-column: span 3; order: 22; }
+.tsheet .w-warrior { grid-column: span 2; order: 41; }
+.tsheet .w-marks   { grid-column: span 2; order: 42; }
+.tsheet .panel { grid-column: 1 / -1; order: 90; }
+
+/* tier labels; hidden when their group has no card */
+.tsheet .tier { grid-column: 1 / -1; display: flex; align-items: center; gap: 2mm; margin: .4mm 0 -1.4mm; font-size: 7pt; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); break-after: avoid; page-break-after: avoid; }
+.tsheet .tier::after { content: ""; flex: 1; border-top: 0.3mm solid var(--rule); }
+.tsheet .t-heroes { order: 20; }
+.tsheet .t-forms  { order: 40; }
+.tsheet .grid:not(:has(.w-hero, .w-shaman)) .t-heroes { display: none; }
+.tsheet .grid:not(:has(.w-warrior, .w-marks)) .t-forms { display: none; }
+.tsheet .panel:not(:has(.abil)) { display: none; }
+
+/* card shell */
+.tsheet .card { border: 0.4mm solid var(--line); border-radius: 1.3mm; overflow: hidden; background: var(--parch); break-inside: avoid; page-break-inside: avoid; display: flex; flex-direction: column; height: 100%; }
+.tsheet .hd { display: flex; align-items: center; gap: 2mm; color: #fff; padding: .9mm 1.6mm .9mm 2.2mm; background: var(--warrior); }
+.tsheet .warlord .hd { background: var(--warlord); }
+.tsheet .hero .hd    { background: var(--hero); color: #1d1206; }
+.tsheet .shaman .hd  { background: var(--shaman); }
+.tsheet .warrior .hd { background: var(--warrior); }
+.tsheet .marks .hd   { background: var(--marks); }
+.tsheet .hd .who { display: flex; align-items: baseline; gap: 2mm; min-width: 0; flex-wrap: wrap; }
+.tsheet .hd .nm  { font-weight: 800; letter-spacing: .1px; line-height: 1.05; }
+.tsheet .hd .ty  { font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; opacity: .8; }
+.tsheet .bp { margin-left: auto; flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; background: #fff; color: var(--ink); border-radius: 1mm; padding: .3mm 1.3mm; line-height: 1; border: 0.3mm solid rgba(0,0,0,.25); }
+.tsheet .bp b { font-size: 10.5pt; }
+.tsheet .bp span { font-size: 5.8pt; font-weight: 800; text-transform: uppercase; letter-spacing: .3px; }
+.tsheet .bd { padding: 1.6mm 2.2mm 1.6mm; flex: 1; }
+
+/* name sizes by tier */
+.tsheet .warlord .nm { font-size: 18pt; }
+.tsheet .hero .nm, .tsheet .shaman .nm { font-size: 13.5pt; }
+.tsheet .warrior .nm, .tsheet .marks .nm, .tsheet .other .nm { font-size: 10.5pt; }
+.tsheet .nmw { display: inline-block; width: 34mm; height: 4.4mm; border-bottom: 0.45mm solid rgba(255,255,255,.9); }
+.tsheet .nmw.dark { border-bottom-color: var(--ink); }
+
+/* wound / figure tracks */
+.tsheet .track { display: flex; align-items: center; gap: 1.5mm; flex-wrap: wrap; }
+.tsheet .box { display: inline-block; width: 8.8mm; height: 8.8mm; border: 0.6mm solid var(--ink); background: #fff; border-radius: .9mm; position: relative; flex: 0 0 auto; }
+.tsheet .box i { position: absolute; right: .6mm; bottom: .1mm; font-style: normal; font-size: 6.4pt; color: #9a9384; font-weight: 800; }
+.tsheet .warlord .box { width: 10.6mm; height: 10.6mm; }
+.tsheet .warlord .box i { font-size: 7.2pt; }
+.tsheet .box.fig { border-radius: 50%; }
+.tsheet .box.extra { border-style: dashed; }
+.tsheet .box.extra i { left: .6mm; right: auto; top: .2mm; bottom: auto; }
+.tsheet .xnote { font-size: 6pt; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; color: var(--muted); }
+.tsheet .tlbl { font-size: 6.6pt; font-weight: 800; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); margin: 0 0 .7mm; }
+.tsheet .tlbl em { font-style: normal; font-weight: 600; text-transform: none; letter-spacing: 0; }
+
+/* equipment and skills */
+.tsheet .eq { display: flex; flex-wrap: wrap; gap: 1.2mm; margin: 1.4mm 0 1mm; }
+.tsheet .chip { background: #fff; border: 0.3mm solid #7a7266; border-radius: 1mm; padding: .3mm 1.4mm; font-size: 8pt; white-space: nowrap; }
+.tsheet .chip b { font-weight: 800; }
+.tsheet .chip.none { color: var(--muted); border-style: dashed; background: transparent; }
+.tsheet .suit { font-size: 10pt; line-height: 0; position: relative; top: .35mm; }
+.tsheet .red { color: #a3261a; }
+.tsheet .ab { margin: 0; padding: 0; list-style: none; }
+.tsheet .ab li { padding: .5mm 0 .3mm; border-top: 0.25mm solid var(--rule); font-size: 8.2pt; }
+.tsheet .ab li:first-child { border-top: 0; padding-top: 0; }
+.tsheet .ab .n { font-weight: 800; }
+.tsheet .ab .t { font-size: 6.2pt; font-weight: 800; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); margin: 0 .8mm 0 .5mm; }
+/* Veteran tag: "Veteran" on Characters, "Vet" on Formations */
+.tsheet .ab .ts { display: none; }
+.tsheet .warrior .ab .tl, .tsheet .marks .ab .tl { display: none; }
+.tsheet .warrior .ab .ts, .tsheet .marks .ab .ts { display: inline; }
+
+/* warlord: track left, kit right */
+.tsheet .warlord .bd { display: grid; grid-template-columns: auto 1fr; gap: 0 5mm; align-items: center; }
+.tsheet .warlord .eq { margin-top: 0; }
+
+/* warband abilities strip */
+.tsheet .panel { border: 0.4mm solid var(--line); border-radius: 1.3mm; overflow: hidden; background: var(--parch); display: flex; break-inside: avoid; page-break-inside: avoid; }
+.tsheet .panel .ph { background: var(--hist); color: #fff; font-weight: 900; font-size: 9pt; letter-spacing: .6px; text-transform: uppercase; padding: 1.4mm 2.2mm; display: flex; align-items: center; width: 27mm; line-height: 1.1; flex: 0 0 auto; }
+.tsheet .panel .pb { flex: 1; display: grid; grid-template-columns: 1fr 1fr; }
+.tsheet .abil { display: grid; grid-template-columns: auto 1fr; gap: 0 2mm; align-items: start; padding: 1.4mm 2.2mm; border-left: 0.25mm solid var(--rule); }
+.tsheet .abil:first-child { border-left: 0; }
+.tsheet .abil .box { width: 7.4mm; height: 7.4mm; }
+.tsheet .abil b { font-size: 9pt; font-weight: 900; display: block; }
+.tsheet .abil span { font-size: 7.8pt; }
+</style>
