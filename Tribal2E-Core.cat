@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<catalogue xmlns="http://www.battlescribe.net/schema/catalogueSchema" library="false" id="f5eb-99bf-6530-ebf1" name="TRIBAL 2nd Edition - Core Warband" gameSystemId="sys-e140-121e-9b34-0be3" gameSystemRevision="5" revision="5" battleScribeVersion="2.03" authorUrl="https://github.com/Kelvios/Tribal-2nd-edition" type="catalogue" authorName="Kelvios. Unofficial fan-made data for TRIBAL 2nd Edition (rules by Mana Press).">
+<catalogue xmlns="http://www.battlescribe.net/schema/catalogueSchema" library="false" id="f5eb-99bf-6530-ebf1" name="TRIBAL 2nd Edition - Core Warband" gameSystemId="sys-e140-121e-9b34-0be3" gameSystemRevision="5" revision="6" battleScribeVersion="2.03" authorUrl="https://github.com/Kelvios/Tribal-2nd-edition" type="catalogue" authorName="Kelvios. Unofficial fan-made data for TRIBAL 2nd Edition (rules by Mana Press).">
   <sharedSelectionEntries>
     <selectionEntry type="upgrade" name="Short Weapon" hidden="false" id="5e2b-fe00-9542-4e05" import="true">
       <rules>
@@ -489,7 +489,7 @@
       </categoryLinks>
       <rules>
         <rule id="ea8c-f31f-631b-d174" name="Stalking the Prey" hidden="false">
-          <description>1 Honour Point, once per warband. Before the game, draw 4 cards from the shared deck: black = a hidden Unit, red = a decoy (redraw if all 4 are red). Deploy them face down; each black card deployed keeps one Unit off-table in reserve. Revealed voluntarily, or when an enemy Charges or moves within 1 long card-edge of the card. Concealed cards act last each turn (Walk only, never within 1 long card-edge of an enemy). Cannot be used together with the Concealment Skill, and never applies to Cavalry or Chariots.</description>
+          <description>1 Honour Point, once per warband. Before the game, draw 4 cards from the shared deck: black = a hidden Unit, red = a decoy (redraw if all 4 are red). Deploy them face down; each black card deployed keeps one Unit off-table in reserve. Revealed voluntarily, or when an enemy Charges or moves within 1 long card-edge of the card. Concealed cards act last each turn (they count as on foot and may not Sprint, though they may March; never within 1 long card-edge of an enemy). Cannot be used together with the Concealment Skill, and never applies to Cavalry or Chariots.</description>
         </rule>
       </rules>
       <constraints>
@@ -786,6 +786,28 @@
         </profile>
       </profiles>
       <selectionEntryGroups>
+        <selectionEntryGroup name="Weapon (only with Elite Marksmen; choose 1)" hidden="false" id="7d3f-b2a1-94c6-e508">
+          <constraints>
+            <constraint type="min" value="0" field="selections" scope="parent" shared="true" id="e1a7-6c30-9b4d-f258" />
+            <constraint type="max" value="1" field="selections" scope="parent" shared="true" id="52c9-d8e4-0a17-b63f" />
+          </constraints>
+          <modifiers>
+            <modifier type="set" field="hidden" value="true">
+              <conditions>
+                <condition type="lessThan" field="selections" scope="c59c-1a05-e8bc-163c" value="1" shared="true" includeChildSelections="true" includeChildForces="false" childId="52e9-e22b-55e2-2dc8" />
+              </conditions>
+            </modifier>
+            <modifier type="set" field="e1a7-6c30-9b4d-f258" value="1">
+              <conditions>
+                <condition type="atLeast" field="selections" scope="c59c-1a05-e8bc-163c" value="1" shared="true" includeChildSelections="true" includeChildForces="false" childId="52e9-e22b-55e2-2dc8" />
+              </conditions>
+            </modifier>
+          </modifiers>
+          <entryLinks>
+            <entryLink name="Short Weapon" hidden="false" id="3b9e-5c07-d1a4-6f82" type="selectionEntry" targetId="5e2b-fe00-9542-4e05" import="true" />
+            <entryLink name="Long Weapon" hidden="false" id="c8f2-04b7-e9d3-1a65" type="selectionEntry" targetId="ec58-e347-1d4d-3243" import="true" />
+          </entryLinks>
+        </selectionEntryGroup>
         <selectionEntryGroup name="Skills (choose up to 2)" hidden="false" id="7860-5ed8-1dee-5ab2">
           <constraints>
             <constraint type="max" value="2" field="selections" scope="parent" shared="true" id="bc2c-da8f-30f0-8e47" />
