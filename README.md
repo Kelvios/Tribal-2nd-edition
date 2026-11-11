@@ -30,7 +30,7 @@ New Recruit limits how many credits you can take but cannot check which Skill yo
 
 ## Version
 
-Revision 5. Revision 5 adds the Free Skills credits above and was tested in the New Recruit app. Revision 3 was tested more fully: the warband limits (including the Heroes limit that grows with each Formation), the roster caps on Counting Coup and Rally Around the Flag, weapon defaults, and Skill and Historical Rule choices all behaved as expected. Revision 4 changed only the text of the Shaman's note. Where a rule can't be expressed exactly in New Recruit, check it yourself against your rulebook.
+Catalogue revision 6, game system revision 5. Revision 6 changes the catalogue only: Marksmen with Elite Marksmen now choose a short or long weapon (seen working in New Recruit), and Stalking the Prey allows March but not Sprint. Revision 5 adds the Free Skills credits above and was tested in the New Recruit app. Revision 3 was tested more fully: the warband limits (including the Heroes limit that grows with each Formation), the roster caps on Counting Coup and Rally Around the Flag, weapon defaults, and Skill and Historical Rule choices all behaved as expected. Revision 4 changed only the text of the Shaman's note. Where a rule can't be expressed exactly in New Recruit, check it yourself against your rulebook.
 
 ## Using them
 
